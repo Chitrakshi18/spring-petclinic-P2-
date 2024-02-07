@@ -21,6 +21,14 @@ You can then access the Petclinic at <http://localhost:8080/>.
 
 <img width="1042" alt="petclinic-screenshot" src="https://cloud.githubusercontent.com/assets/838318/19727082/2aee6d6c-9b8e-11e6-81fe-e889a5ddfded.png">
 
+## Building a Container
+
+There is no `Dockerfile` in this project. You can build a container image (if you have a docker daemon) using the Spring Boot build plugin:
+
+```bash
+./mvnw spring-boot:build-image
+```
+
 
 ## Continuos Integration for application (Part2 of Project)
 
@@ -29,7 +37,7 @@ You can then access the Petclinic at <http://localhost:8080/>.
 
 ![Alt text](hlf.png)
 
-STEPS:
+## STEPS:
 
 1. Performed static code analysis using Sonarcloud 
 2. Build application using maven 

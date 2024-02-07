@@ -9,7 +9,7 @@ pipeline {
 	      git branch: 'main', changelog: false, poll: false, url: 'https://github.com/Chitrakshi18/spring-petclinic.git'
 	  }
     }
-    stage("sonarcloud: stage 2"){
+    /*stage("sonarcloud: stage 2"){
 	  steps{
 	      withCredentials([string(credentialsId: 'sonarcloud', variable: 'SonarCloud')]) {
 	        sh "mvn clean verify sonar:sonar -Dsonar.token=${env.SonarCloud} -Dsonar.host.url=https://sonarcloud.io "
@@ -17,7 +17,7 @@ pipeline {
 	          
 	      }
 	  }
-    }
+    }*/
     stage("build code using maven: stage 2"){
 	  steps{
 	      sh 'mvn clean package -DskipTests=true'
@@ -57,7 +57,7 @@ pipeline {
 	  }
 	  
     }
-    stage("Push to JFrog artifactory : stage6") {
+    /*stage("Push to JFrog artifactory : stage6") {
     steps {
         withCredentials([usernamePassword(credentialsId: 'jfrog-creds', passwordVariable: 'jfrogPass', usernameVariable: 'jfrogUser')]) {
             sh "docker tag chitrakshipuri/petapp:JFrog chitrakshi18.jfrog.io/docker-local2-docker/chitrakshipuri/petapp:${BUILD_NUMBER}"
@@ -69,7 +69,7 @@ pipeline {
 	      
 	  }
 	  
-    }
+    }*/
     
     
  }

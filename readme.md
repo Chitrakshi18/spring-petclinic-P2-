@@ -22,10 +22,14 @@ You can then access the Petclinic at <http://localhost:8080/>.
 <img width="1042" alt="petclinic-screenshot" src="https://cloud.githubusercontent.com/assets/838318/19727082/2aee6d6c-9b8e-11e6-81fe-e889a5ddfded.png">
 
 
-Continuos Integration for application (Part2 of Project)
+## Continuos Integration for application (Part2 of Project)
+
 ![Alt text](jenkinsCI.png)
 
+
 ![Alt text](hlf.png)
+
+STEPS:
 
 1. Performed static code analysis using Sonarcloud 
 2. Build application using maven 
@@ -35,10 +39,19 @@ Continuos Integration for application (Part2 of Project)
 6. Used JFrog Artficatory and DockerHub to store Jar/Docker Images
 
 ![Alt text](<Screenshot 2024-02-07 234009.png>)
+
+
 ![Alt text](maven.png)
+
+
 ![Alt text](sonarcloud.png)
+
+
 ![Alt text](dockerhub.png)
+
+
 ![Alt text](jfrog.png)
+
 
 ## Database configuration
 

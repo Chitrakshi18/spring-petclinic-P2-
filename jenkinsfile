@@ -1,0 +1,77 @@
+pipeline {
+  agent any
+  tools{
+    maven "MAVEN"
+  }
+  stages{
+    stage("checkoutcode: stage 1"){
+	  steps{
+	      git branch: 'main', changelog: false, poll: false, url: 'https://github.com/Chitrakshi18/spring-petclinic.git'
+	  }
+    }
+    stage("sonarcloud: stage 2"){
+	  steps{
+	      withCredentials([string(credentialsId: 'sonarcloud', variable: 'SonarCloud')]) {
+	        sh "mvn clean verify sonar:sonar -Dsonar.token=${env.SonarCloud} -Dsonar.host.url=https://sonarcloud.io "
+	      
+	          
+	      }
+	  }
+    }
+    stage("build code using maven: stage 2"){
+	  steps{
+	      sh 'mvn clean package -DskipTests=true'
+	      
+	  }
+    }
+    stage("scan code using sonar: stage 3"){
+      environment {
+        SONAR_URL = "http://13.201.80.37:9000/"
+      }
+	  steps{
+	    withCredentials([string(credentialsId: 'sonarcloud-credentials', variable: 'SonarToken')]) {
+	      sh 'mvn sonar:sonar -Dsonar.login=$SonarToken -Dsonar.host.url=${SONAR_URL}'
+	    }
+	      
+	  }
+    }
+    
+    
+    stage("building dockerfile : stage 4"){
+      steps{
+        
+          sh 'echo "Building Docker Image from Jar FIle" '
+	      sh 'docker build -t chitrakshipuri/petapp:JFrog .'
+	      
+	  }
+	  
+    }
+    stage("pushing to dockerhub : stage 5"){
+      steps{
+        withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
+          sh 'echo "pushing Docker Image to dockerhub" '
+          sh "docker login -u ${env.user} -p ${env.pass}"
+	      sh 'docker push chitrakshipuri/petapp:$BUILD_NUMBER'
+        }
+	      
+	  }
+	  
+    }
+    stage("Push to JFrog artifactory : stage6") {
+    steps {
+        withCredentials([usernamePassword(credentialsId: 'jfrog-creds', passwordVariable: 'jfrogPass', usernameVariable: 'jfrogUser')]) {
+            sh "docker tag chitrakshipuri/petapp:JFrog chitrakshi18.jfrog.io/docker-local2-docker/chitrakshipuri/petapp:${BUILD_NUMBER}"
+            sh "echo 'tagging success' "
+            sh "echo $jfrogPass | docker login -u ${env.jfrogUser} --password-stdin"
+            sh "echo 'login success' "
+            sh "docker push chitrakshi18.jfrog.io/docker-local2-docker/chitrakshipuri/petapp:${BUILD_NUMBER} "
+	   }
+	      
+	  }
+	  
+    }
+    
+    
+ }
+}
+	 

@@ -1,6 +1,4 @@
-# Spring PetClinic Sample Application [![Build Status](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml/badge.svg)](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml)
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/spring-projects/spring-petclinic) [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=7517918)
+# Spring PetClinic Sample Application 
 
 ## Understanding the Spring Petclinic application with a few diagrams
 
@@ -35,9 +33,14 @@ There is no `Dockerfile` in this project. You can build a container image (if yo
 ![Alt text](jenkinsCI.png)
 
 
+
+
+
 ![Alt text](hlf.png)
 
+
 ## STEPS:
+
 
 1. Performed static code analysis using Sonarcloud 
 2. Build application using maven 
@@ -47,6 +50,7 @@ There is no `Dockerfile` in this project. You can build a container image (if yo
 6. Used JFrog Artficatory and DockerHub to store Jar/Docker Images
 
 ![Alt text](<Screenshot 2024-02-07 234009.png>)
+
 
 
 ![Alt text](maven.png)
